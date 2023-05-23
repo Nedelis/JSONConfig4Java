@@ -11,3 +11,26 @@ With JC4J you can create configs and easily read them avoiding unsafe casts and 
 
 **If you have any questions, or you have found bugs, please contact with me in my discord — `Nedelis#9496`!**
 
+## Table of contents
+
+1. [Installation](#installation)
+2. [Set up the Logger](#set-up-the-logger)
+3. [Usage](#usage)
+
+## Installation
+
+You have 2 options to install this library.
+
+#### First:
+
+1. Download the latest release from the [releases page](https://github.com/nedelis/jsonconfig4java/releases)
+2. Import downloaded `.JAR` file into your project
+3. That's all.
+
+#### Second:
+
+*soon...*
+
+## Set up the Logger
+
+## Usage
