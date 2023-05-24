@@ -1,0 +1,1 @@
+packageSearchIndex = [{"l":"All Packages","u":"allpackages-index.html"},{"l":"com.github.nedelis.jc4j"},{"l":"com.github.nedelis.jc4j.jsonvalue"},{"l":"com.github.nedelis.jc4j.logging"},{"l":"com.github.nedelis.jc4j.util"}];updateSearchResults();
