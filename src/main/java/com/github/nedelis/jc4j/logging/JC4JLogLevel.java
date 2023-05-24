@@ -3,6 +3,9 @@ package com.github.nedelis.jc4j.logging;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * This class contains all allowed message/logger levels
+ */
 @SuppressWarnings("unused")
 public final class JC4JLogLevel {
 

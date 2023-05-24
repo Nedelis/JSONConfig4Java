@@ -1,7 +1,7 @@
 package com.github.nedelis.jc4j.logging;
 
 import com.github.nedelis.jc4j.util.NoParamsFunction;
-import com.github.nedelis.jc4j.util.VoidFunction;
+import com.github.nedelis.jc4j.util.Procedure;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Range;
 
@@ -13,6 +13,12 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
+
+/**
+ * Custom logger of the library. This logger is wrapper for the System.out.println() function
+ * @see JC4JLoggerBuilder
+ * @see JC4JLogLevel
+ */
 
 @SuppressWarnings("unused")
 public class JC4JLogger {
@@ -41,6 +47,10 @@ public class JC4JLogger {
         }
     }
 
+    /**
+     * Prints any throwable to the console and saves the message into {@link #messages}
+     * @param t throwable to print and save its message
+     */
     private void printThrowable(@NotNull Throwable t) {
         var sw = new StringWriter();
         t.printStackTrace(new PrintWriter(sw));
@@ -48,6 +58,11 @@ public class JC4JLogger {
         messages.add(sw.toString());
     }
 
+    /**
+     * Returns whether the message with given level can be printed or not
+     * @param msgLevel level of the message that tries to be printed
+     * @return true if the message level less or equal to the logger level
+     */
     private boolean canPrint(@Range(from=0, to=7) int msgLevel) {
         return isEnabled() && logLevel <= msgLevel;
     }
@@ -126,6 +141,10 @@ public class JC4JLogger {
         }
     }
 
+    /**
+     * Prints the given message, stores it in the {@link #messages} and shuts down the program
+     * @param msg message to be printed
+     */
     public void fatal(String msg) {
         if (canPrint(JC4JLogLevel.FATAL)) {
             var formattedMessage = pattern.getFormattedMessage(msg, name(), JC4JLogLevel.FATAL);
@@ -135,6 +154,10 @@ public class JC4JLogger {
         }
     }
 
+    /**
+     * Do the same thing as {@link #fatal(String)}, but also prints the given throwable
+     * @param t throwable to be printed
+     */
     public void fatal(String msg, @NotNull Throwable t) {
         if (canPrint(JC4JLogLevel.FATAL)) {
             var formattedMessage = pattern.getFormattedMessage(msg, name(), JC4JLogLevel.FATAL);
@@ -147,6 +170,12 @@ public class JC4JLogger {
         }
     }
 
+    /**
+     * This function allows to do any other function without logging
+     * @param func returnable function without params
+     * @return result of the given function
+     * @param <R> type of the function's return value
+     */
     public <R> R doWithoutLogging(@NotNull NoParamsFunction<R> func) {
         disable();
         var result = func.apply();
@@ -154,28 +183,48 @@ public class JC4JLogger {
         return result;
     }
 
-    public void doWithoutLogging(@NotNull VoidFunction func) {
+    /**
+     * This procedure allows to do any other procedure without logging
+     * @param proc procedure that will be executed
+     */
+    public void doWithoutLogging(@NotNull Procedure proc) {
         disable();
-        func.apply();
+        proc.apply();
         enable();
     }
 
+    /**
+     * Disables logger
+     */
     public void disable() {
         this.isEnabled = false;
     }
 
+    /**
+     * Enables logger
+     */
     public void enable() {
         this.isEnabled = true;
     }
 
+    /**
+     * Checks whether the logger is enabled or not
+     * @return true if the logger is enabled
+     */
     public boolean isEnabled() {
         return this.isEnabled;
     }
 
+    /**
+     * @return name of the logger
+     */
     public String name() {
         return this.name;
     }
 
+    /**
+     * @return level of the logger
+     */
     public int logLevel() {
         return this.logLevel;
     }
