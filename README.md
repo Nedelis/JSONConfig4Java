@@ -11,6 +11,8 @@ With JC4J you can create configs and easily read them avoiding unsafe casts and 
 
 **If you have any questions, or you have found bugs, please contact with me in my discord — `Nedelis#9496`!**
 
+**You can find docs [here](https://nedelis.github.io/JSONConfig4Java/)**
+
 ## Table of contents
 
 1. [Installation](#installation)
@@ -73,7 +75,7 @@ That's all. If you want to find out details about logging system, you can read j
 ## Usage
 
 In this section, I'll give you 2 examples. First will be simple and second will be hard.
-But, at first, I recommend you to read javadocs during reading this examples.
+But, at first, I recommend you to read [javadocs](https://nedelis.github.io/JSONConfig4Java/) during reading this examples.
 
 [Return to the table of contents](#table-of-contents)
 
@@ -127,7 +129,7 @@ public class Settings {
 
 ```
 
-That's all. You can find other ways to get config's values by reading javadocs.
+That's all. You can find other ways to get config's values by reading [javadocs](https://nedelis.github.io/JSONConfig4Java/).
 
 [Return to the table of contents](#table-of-contents)
 
