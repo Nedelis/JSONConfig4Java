@@ -55,6 +55,12 @@ public record JSONValue(Object value) {
         return JSONValueType.toJavaValue(value, def);
     }
 
+    /**
+     * Converting some json value into its representation in java; if value can't be converted, returns null
+     * @param type converter
+     * @return converted json value
+     * @param <T> specifies which type the java value will be
+     */
     public <T> T toJavaValue(@NotNull IJSONValueType<T> type) {
         return type.convert(value, null);
     }

@@ -57,10 +57,17 @@ public final class JC4JLoggerMessagePattern {
 
     private final @NotNull String pattern;
 
+    /**
+     * Creates new {@link JC4JLoggerMessagePattern} with default pattern
+     */
     public JC4JLoggerMessagePattern() {
         this("`HH`:`mm`:`ss` `log-name` [`lvl`] `msg`");
     }
 
+    /**
+     * Creates new {@link JC4JLoggerMessagePattern} with the specified pattern
+     * @param pattern custom message pattern
+     */
     public JC4JLoggerMessagePattern(@NotNull String pattern) {
         this.pattern = pattern;
     }

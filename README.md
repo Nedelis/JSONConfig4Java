@@ -4,6 +4,7 @@ Welcome to the JC4J! This library provides you with easy management of your .jso
 With JC4J you can create configs and easily read them avoiding unsafe casts and boilerplate code.
 
 <a style="margin-left:20px" href="https://github.com/nedelis/jsonconfig4java">
+    <!--suppress CheckImageSize -->
     <img src="./logo.png" alt="logo of the project" width="200" height="200" title="logo">
 </a>
 
@@ -48,23 +49,24 @@ Here is an example:
 
 // import ...;
 
+@SuppressWarnings("ALL")
 public class Foo {
-    
+
     // You should customize logger in the initialization function (for example, here, I do it in the main function).
     public static void main(String[] args) {
-        
+
         // first, create a new logger
         JC4JLogger NEW_LOGGER = new JC4JLoggerBuilder(/*here you can put custom name*/).
                 setPathToLogFile(Path.of("./logs/log.log")).
                 setLogLevel(JC4JLogLevel.ALL).
                 /*you can also customize message pattern by setPattern()*/
-                build();
-                
+                        build();
+
         // next, reassign the default logger
         JSONConfig4Java.LOGGER = NEW_LOGGER;
-        
+
     }
-    
+
 }
 ```
 
@@ -121,9 +123,9 @@ public class Settings {
     // So, at first we get parameter from the config, and then we convert it to java value.
     // p.s. function toJavaValue() at the JSONValue class has 2 variations:
     // here we used variation, that specifies return type, but also we could use default value instead
-    public static final int LOUDNESS = configWrapper.get("loudness").toJavaValue(JSONConfigValueType.INT);
-    public static final double GUI_AMPLIFIER = configWrapper.get("gui-size-amplifier").toJavaValue(JSONConfigValueType.DOUBLE);
-    public static final boolean AUTO_SAVE = configWrapper.get("auto-save").toJavaValue(JSONConfigValueType.BOOL);
+    public static final int LOUDNESS = configWrapper.getAsJavaValue("loudness", JSONConfigValueType.INT);
+    public static final double GUI_AMPLIFIER = configWrapper.getAsJavaValue("gui-size-amplifier", JSONConfigValueType.DOUBLE);
+    public static final boolean AUTO_SAVE = configWrapper.getAsJavaValue("auto-save", JSONConfigValueType.BOOL);
     
 }
 
@@ -191,20 +193,22 @@ public class Settings {
             Path.of("./resources/default_settings.json").normalize().toFile()
     );
     
-    public static final int SOUND_ENTITIES = configWrapper.config().
-            get("main-settings").toJavaValue(JSONValueType.JS_VAL_MAP).
+    public static final int SOUND_ENTITIES = configWrapper.
+            getAsJavaValue("main-settings", JSONValueType.JS_VAL_MAP).
             get("sound").toJavaValue(JSONValueType.JS_VAL_MAP).
             get("entities").toJavaValue(JSONValueType.INT);
     // So, here, at first, we got the 'main-settings' map from the config
     // Then we got 'sound' map from the 'main-settings' map
     // And then we finally found 'entities' sound value
-    public static final String ANTIALIASING_TYPE = configWrapper.config().
-            get("main-settings").toJavaValue(JSONValueType.JS_VAL_MAP).
+    public static final String ANTIALIASING_TYPE = configWrapper.
+            getAsJavaValue("main-settings", JSONValueType.JS_VAL_MAP).
             get("graphics").toJavaValue(JSONValueType.JS_VAL_MAP).
             get("antialiasing").toJavaValue(JSONValueType.STR);
     
-    public static final List<?> MODIFICATIONS = configWrapper.get("modifications-list").toJavaValue(JSONValueType.JS_VAL_LIST);
-    public static final boolean AUTO_SAVE = configWrapper.get("other-settings").toJavaValue(JSONValueType.JS_VAL_MAP).get("auto-save").toJavaValue(JSONValueType.BOOL);
+    public static final List<?> MODIFICATIONS = configWrapper.getAsJavaValue("modifications-list", JSONValueType.JS_VAL_LIST);
+    public static final boolean AUTO_SAVE = configWrapper.
+            getAsJavaValue("other-settings", JSONValueType.JS_VAL_MAP).
+            get("auto-save").toJavaValue(JSONValueType.BOOL);
 }
 ```
 
@@ -216,6 +220,9 @@ Phew, that's all! All other settings can be obtained in the same way. I hope tha
 
 ## Future updates
 
-Well, in future I'm going to add config bundles, runtime config modification and links system that will allow you to get any config value by special string.
+Well, in future I'm going to add:
+1. [ ] Config bundles
+2. [x] Runtime config change
+3. [ ] Links system that will allow you to get any config value by special string.
 
 [Return to the table of contents](#table-of-contents)

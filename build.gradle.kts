@@ -3,7 +3,7 @@ plugins {
 }
 
 group = "com.github.nedelis"
-version = "3.4b"
+version = "3.5b"
 
 repositories {
     mavenCentral()

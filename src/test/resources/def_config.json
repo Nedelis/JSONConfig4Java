@@ -1,0 +1,7 @@
+{
+  "var1" : 10,
+  "var2" : "some var",
+  "var3" : {
+    "type" : "dict"
+  }
+}

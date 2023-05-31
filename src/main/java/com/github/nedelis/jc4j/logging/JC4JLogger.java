@@ -157,6 +157,7 @@ public class JC4JLogger {
     /**
      * Do the same thing as {@link #fatal(String)}, but also prints the given throwable
      * @param t throwable to be printed
+     * @param msg message to be printed
      */
     public void fatal(String msg, @NotNull Throwable t) {
         if (canPrint(JC4JLogLevel.FATAL)) {
